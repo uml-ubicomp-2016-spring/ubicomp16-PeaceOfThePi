@@ -2,7 +2,7 @@
 
 April 4, 2016
 
-  -Expresse was set up for the website, and the a basic for the website was created and the google maps API was included
+  -Expresse was set up for the website. A simple website was created and the google maps API was included
   
   
 April 11, 2016
