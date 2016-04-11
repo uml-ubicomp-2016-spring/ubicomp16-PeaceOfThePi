@@ -5,7 +5,7 @@ var app = express();
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 //set the local host port
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 9000);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res)=>{
