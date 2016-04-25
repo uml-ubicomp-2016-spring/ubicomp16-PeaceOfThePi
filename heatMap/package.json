@@ -1,0 +1,6 @@
+{
+  "description":"Holds the heatmap data, and exports it to a map.",	
+  "dependencies": {
+    "heatmap.js": "^2.0.2"
+  }
+}

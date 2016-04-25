@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Data Display</title>
+    <style>
+    html { height: 100% }
+    body { height: 100%; margin: 0; padding: 0; font-family:sans-serif; }
+    #map-canvas { height: 50%; width: 100% }
+    h1 { position:absolute; background:black; color:white; padding:10px; font-weight:200; z-index:10000;}
+    #all-examples-info { position:absolute; background:white; font-size:16px; padding:20px; bottom:20px; width:350px; line-height:150%; border:1px solid rgba(0,0,0,.2);}
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyA0k_uFGU8696noGaVsVQDTs12nBSzNScc"></script>
+    <script src="node_modules/heatmap.js/heatmap.js"></script>
+    <script src="./gmaps-heatmap.js"></script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+    <script src="./myHeatData.js"> </script>
+    <div id="userInteraction">
+      <form>
+        <table>
+          <tr>
+            <td>
+              <select>
+                <option>Start Time</option>
+                <option valueInit='demoData'>Demo</option>;
+                <option valueInit='1'>1:00</option>;
+                <option valueInit='2'>2:00</option>;
+                <option valueInit='3'>3:00</option>;
+                <option valueInit='4'>1:00</option>;
+                <option valueInit='5'>1:00</option>;
+                <option valueInit='6'>1:00</option>;
+                <option valueInit='7'>1:00</option>;
+                <option valueInit='8'>1:00</option>;
+                <option valueInit='9'>1:00</option>;
+                <option valueInit='10'>1:00</option>;
+                <option valueInit='11'>1:00</option>;
+                <option valueInit='12'>1:00</option>;
+              </select>
+            </td>
+            <td>
+              <select>
+                <option>End Time</option>
+                <option valueFini='1'>1:00</option>;
+                <option valueFini='2'>2:00</option>;
+                <option valueFini='3'>3:00</option>;
+                <option valueFini='4'>1:00</option>;
+                <option valueFini='5'>1:00</option>;
+                <option valueFini='6'>1:00</option>;
+                <option valueFini='7'>1:00</option>;
+                <option valueFini='8'>1:00</option>;
+                <option valueFini='9'>1:00</option>;
+                <option valueFini='10'>1:00</option>;
+                <option valueFini='11'>1:00</option>;
+                <option valueFini='12'>1:00</option>;
+                <option valueFini='demoData'>Demo</option>";
+              </select>
+            </td>
+            <td>
+              <select>
+                <option amPM='AM'>AM</option>
+                <option amPM='PM'>PM</option>
+              </select>
+            </td>
+          </tr>
+        </form>
+      </div>
+    </body>
+  </html>
