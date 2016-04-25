@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements LocationListener {
         //instantiate LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
+        //locationManager request for location update every 10 second or changes to location
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 
