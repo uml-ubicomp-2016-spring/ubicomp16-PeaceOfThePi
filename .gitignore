@@ -1,3 +1,5 @@
 /node_modules #Ignore the directory node_modules
 */~ #Anything that is an emacs backup
 */# #Anything that is an emacs crash save
+.*/~
+.DS_Store
