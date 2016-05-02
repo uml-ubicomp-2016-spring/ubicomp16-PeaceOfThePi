@@ -19,53 +19,75 @@
     <div id="map-canvas"></div>
     <script src="./myHeatData.js"> </script>
     <div id="userInteraction">
-      <form>
-        <table>
-          <tr>
+      <table>
+        <tr>
+          <form method='POST' action=''>
             <td>
-              <select>
+              <select id='timeInit'>
                 <option>Start Time</option>
-                <option valueInit='demoData'>Demo</option>;
-                <option valueInit='1'>1:00</option>;
-                <option valueInit='2'>2:00</option>;
-                <option valueInit='3'>3:00</option>;
-                <option valueInit='4'>1:00</option>;
-                <option valueInit='5'>1:00</option>;
-                <option valueInit='6'>1:00</option>;
-                <option valueInit='7'>1:00</option>;
-                <option valueInit='8'>1:00</option>;
-                <option valueInit='9'>1:00</option>;
-                <option valueInit='10'>1:00</option>;
-                <option valueInit='11'>1:00</option>;
-                <option valueInit='12'>1:00</option>;
+                <option value='demoData'>Demo</option>;
+                <option value='0'>All Data</option>;
+                <option value='1'>1:00</option>;
+                <option value='2'>2:00</option>;
+                <option value='3'>3:00</option>;
+                <option value='4'>4:00</option>;
+                <option value='5'>5:00</option>;
+                <option value='6'>6:00</option>;
+                <option value='7'>7:00</option>;
+                <option value='8'>8:00</option>;
+                <option value='9'>9:00</option>;
+                <option value='10'>10:00</option>;
+                <option value='11'>11:00</option>;
+                <option value='12'>12:00</option>;
               </select>
-            </td>
-            <td>
-              <select>
-                <option>End Time</option>
-                <option valueFini='1'>1:00</option>;
-                <option valueFini='2'>2:00</option>;
-                <option valueFini='3'>3:00</option>;
-                <option valueFini='4'>1:00</option>;
-                <option valueFini='5'>1:00</option>;
-                <option valueFini='6'>1:00</option>;
-                <option valueFini='7'>1:00</option>;
-                <option valueFini='8'>1:00</option>;
-                <option valueFini='9'>1:00</option>;
-                <option valueFini='10'>1:00</option>;
-                <option valueFini='11'>1:00</option>;
-                <option valueFini='12'>1:00</option>;
-                <option valueFini='demoData'>Demo</option>";
-              </select>
-            </td>
-            <td>
-              <select>
-                <option amPM='AM'>AM</option>
-                <option amPM='PM'>PM</option>
-              </select>
-            </td>
-          </tr>
+            </td><td>
+            <select id='frameInit'>
+              <option value='AM'>AM</option>
+              <option value='PM'>PM</option>
+            </select>
+          </td>
+          <td>
+            <select id='timeFini'>
+              <option>End Time</option>
+              <option value='demoData'>Demo</option>;
+              <option value='0'>All Data</option>;
+              <option value='1'>1:00</option>;
+              <option value='2'>2:00</option>;
+              <option value='3'>3:00</option>;
+              <option value='4'>4:00</option>;
+              <option value='5'>5:00</option>;
+              <option value='6'>6:00</option>;
+              <option value='7'>7:00</option>;
+              <option value='8'>8:00</option>;
+              <option value='9'>9:00</option>;
+              <option value='10'>10:00</option>;
+              <option value='11'>11:00</option>;
+              <option value='12'>12:00</option>;
+            </select>
+          </td>
+          <td>
+            <select id='frameFini'>
+              <option value='AM'>AM</option>
+              <option value='PM'>PM</option>
+            </select>
+          </td>
         </form>
-      </div>
-    </body>
-  </html>
+        <td>
+          <button id='submit' onclick="chooseDisplayData()">
+          Submit Range
+          </button>
+        </td>
+      </tr>
+      <td colspan='3'>
+        <input type=text id='location'/>
+      </td>
+      <td colspan='2'>
+        <button id='locationSearch' onclick='goToLocation()'>Go To Location</button>
+      </td>
+    </tr>
+  </table>
+  <script src='./mapInteractions.js'>
+  </script>
+</div>
+</body>
+</html>
