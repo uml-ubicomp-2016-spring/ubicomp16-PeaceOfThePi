@@ -6,7 +6,7 @@ Initially the purpose of this project was a sound measuring device that would al
 ## Project features: 
 A mobile application was developed to record the sound level from the environment; and send it to the database upon change of location or every one minute. The mobile application is also capable of measuring the current sound level around the user, and displays it on a progress bar. The data collected is accessible from the web application; this web application features a heat map that graphs the sound level data collected by the mobile application. The color of the graph can vary from red to green; red being an areas polluted with noise, and green being a quiet areas. The web application also allows the users to select different time of the day and a specific area, on which the users desire to verify for noise pollution; these features can be seem on the project design of this report. As mentioned before, noise pollution causes a number of short- and long-term health problems. This application can assist the user to find quiet areas for different purposes.  For example; a family seeking for a new neighborhood to move in with their newborn child, or a student seeking for a quiet area to read could also use this application to find such places. Even thou, the main goal of this project is to help the user to avoid noise polluted areas, the team also find other potential used for this application such as finding an event or a place. Figure 1 is a chart of noise level of everyday sound [2]; this chart could be use to classify the noised polluted area, and help the user to find an events such as a rock concert or a parade that the user would like to partake.  
 
-![Image of Noise Level of Everyday Sounds](https://octodex.github.com/images/Figure1NoiseLevelChart.png)
+![Image of Noise Level of Everyday Sounds](https://github.com/uml-ubicomp-2016-spring/ubicomp16-PeaceOfThePi/blob/master/Figure1NoiseLevelChart.png)
 
 Figure 1: Noise Level of Everyday Sounds [2]
 
@@ -17,38 +17,38 @@ This project started as a sound monitoring application for domestic use such as;
 
 As mentioned before, the mobile application is capable of displaying the sound level around the user on a progress bar as seen in figure 2. This application is simply, but functional; the “GET SOUND” bottom allows the user to manually send data to the database, and the “DELETE DATA” bottom deletes the current database to ease of testing the application. 
 
-![Mobile APP](https://octodex.github.com/images/Figure2MobileApp.png)
+![Mobile APP](https://github.com/uml-ubicomp-2016-spring/ubicomp16-PeaceOfThePi/blob/master/Figure2MobileApp.png)
 
 Figure 2: Mobile Application
 
 The website utilized Google map API to graph the heatmap as seen in figure 3. This heatmap is actually live, allowing the user to see the change of noise pollution throughout the day. Note that the heatmap displayed on figure 3 was generated with generated data, in order to show the full potential of this application. Due to time constrain the team was only able to collect a limited amount of data, as seen in figure 4. This data was collected in Lowell, near the school campus. 
 
-![Live Heatmap](https://octodex.github.com/images/Figure3LiveHeatmap.png)
+![Live Heatmap](https://github.com/uml-ubicomp-2016-spring/ubicomp16-PeaceOfThePi/blob/master/Figure3LiveHeatmap.png)
 
 Figure 3: Live heatmap with generated data.
 
-![Real Data Heatmap](https://octodex.github.com/images/Figure4RealDataHeatmap.png)
+![Real Data Heatmap](https://github.com/uml-ubicomp-2016-spring/ubicomp16-PeaceOfThePi/blob/master/Figure4RealDataHeatmap.png)
 
 Figure 4: Real data heatmap
 
 Search feature was also implemented on the web application. This allows the user to verify a specific area for noise pollution. This feature can be seen in figure 5.
 
-![Search Feature](https://octodex.github.com/images/Figure5SearchHeatmap.png)
+![Search Feature](https://github.com/uml-ubicomp-2016-spring/ubicomp16-PeaceOfThePi/blob/master/Figure5SearchHeatmap.png)
 
 Figure 5: Search Feature
 
 ## File structure: 
 
-### Folder: heatMap / Content JavaScript Object Files, Main Website Handler, Done by Luis Perez, Initial Setup by Carlos Chen.
+#### Folder: heatMap / Content JavaScript Object Files, Main Website Handler, Done by Luis Perez, Initial Setup by Carlos Chen.
 There is not much that is in this specific file, it houses the main user interactivity module, fancy name for website, and allows the user to attain the data that they need for a given time period, or for the purpose of our demonstration to the class, provide a future view of the product. The code, where needed, is documented. It houses 2 external dependencies, both courtesy of the makers of Heatmap.JS, which allows us to display our data through a relevant, and ever updating medium in google maps. These two files were imported, and are the gmaps-heatmap.js, and heatmap.js file. There also exists the myHeatData.js file, which houses a lot of the heatmap operations, used to obtain the user data, and adequately display it to them as well(Comments within the code yield a better explanation than could be given here.)The other file, mainly the website, exists in index.html, which just displays the state of the data back to the user, and allows them to poll their collected data, and display it based on location and/or time.
 
-### Folder: PhoneApp (Android Application) and nodejs (server side + mongodb) done by Khyteang Lim
+#### Folder: PhoneApp (Android Application) and nodejs (server side + mongodb) done by Khyteang Lim
 
 The PhoneApp is written in java and we used a few external libraries such as Apache HttpClient and ProgressDonut. Other android services that we implemented included LocationManager and MediaRecorder. The main java file for the PhoneApp is in src under the name MainActivity.java and in that file, I added comments for each variables and functions that work together to product this mobile application. The UI file is located in the activity_main.xml which includes the ProgressDonut. Inside the AndroidManifest.xml, it includes the uses-
 
 permissions that are required in order to use the android system services such as internet, record audio, location, and write to external storage.
 
-### Folder: Old Website(Removed) by Carlos Chen
+#### Folder: Old Website(Removed) by Carlos Chen
 Initially the website was setup with express, and express-handlebar. Express was used to setup the framework of the website, and handlebar was used to organize the files. Bootstrap was also implemented in this version of the website for the visual of the web. Google map API, and a simple market was initially used to test website. Due to time constrain, the team eventually focused on functionality of the application instead of the visual and this website was scrapped.
 
 ## Graduate Student Paper (Done By Khyteang Lim)
