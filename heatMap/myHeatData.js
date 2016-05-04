@@ -31,12 +31,12 @@ heatmap = new HeatmapOverlay(map, {
 });
 
 
-var phoneData = httpGet2("http://10.253.95.190:3000/soundLocation/");
+var phoneData = httpGet2("http://192.168.29.212:3000/soundLocation/");
 
 function cellPhoneData(reloadAppData, timieInit, timeFini) {
   testData.data = [];
   if (reloadAppData)
-    phoneData = httpGet2("http://10.253.95.190:3000/soundLocation/");
+    phoneData = httpGet2("http://192.168.29.212:3000/soundLocation/");
   for (i = 0; i < 20; i++) {
     var lat = phoneData[i].X_coordinate;
     var lng = phoneData[i].Y_coordinate;
