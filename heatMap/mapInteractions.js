@@ -30,13 +30,43 @@ var historyData = setInterval(function() {
   }, 3)
 }, 3000)
 
-historyData();
-
 function chooseDisplayData() {
   getElements();
+
+  function to24(inpTime, frame) {
+    var i = inpTime;
+    if (frame == 1) { // Initi
+      if (eltData.frameInit == 'PM') {
+        i += 12;
+        i %= 24;
+      }
+    } else if (frame == 2) // Fini
+      if (eltData.frameFini == 'PM') {
+        i += 12;
+        i %= 24;
+      }
+
+    return i;
+  }
   if (eltData.timeInit != 'demoData')
     clearInterval(historyData);
-  console.log(eltData.timeInit)
+  if (eltData.timeInit == 'demoData' || eltData.timeFini == 'demoData')
+    historyData();
+  else if (eltData.timeInit == 0 || eltData.timeFini == 0)
+  //cellPhoneData(1);
+    dummyData2(function() {
+    heatmap.setData(testData);
+  }, 3)
+  else {
+    var init = to24(eltData.timeInit, 1);
+    var fini = to24(eltData.timeFini, 2);
+    console.log(init, fini)
+    dummyData(function() {
+      heatmap.setData(testData);
+    }, 3)
+    //cellPhoneData(1, init, fini);
+  }
+
 }
 
 function goToLocation() {
@@ -56,7 +86,4 @@ function goToLocation() {
       });
     })
   }
-}
-document.getElementById('submit').onclick = function() {
-  console.log("Fi")
 }
