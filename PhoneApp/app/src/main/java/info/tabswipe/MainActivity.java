@@ -43,9 +43,9 @@ import java.util.TimerTask;
 
 public class MainActivity extends Activity implements LocationListener {
 
-    private LocationManager locationManager;
-    private MediaRecorder mediaRecorder;
-    private DonutProgress donutProgress;
+    private LocationManager locationManager; //LocationManager service to get access to location
+    private MediaRecorder mediaRecorder;     //MediaRecorder for recording audio
+    private DonutProgress donutProgress;     //DonutProgress for graphically display maxAmp
     private double dB;
 
     int MY_PERMISSION_ACCESS_COURSE_LOCATION = 1000;
@@ -64,10 +64,9 @@ public class MainActivity extends Activity implements LocationListener {
         Button getSoundBtn = (Button) findViewById(R.id.getAmpBtn);
 
         //call startRecording function to start mediaRecorder
-        startRecording();
+
 
         //check for location permission
-        //檢查位置的權限
         if ( ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -77,10 +76,11 @@ public class MainActivity extends Activity implements LocationListener {
         //instantiate LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
+        //locationManager request for location update every 10 second or changes to location
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 
+        //onClickListener for getSoundBtn which will called the getAmp() function
         getSoundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,15 +89,34 @@ public class MainActivity extends Activity implements LocationListener {
             }
         });
 
+        //onClickListener for deleteDateBaseBtn which will request a delete to the localhost database
         deleteDataBaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteRequest("10.253.95.190", "soundLocation");
+                //make sure to modify the ip address to your computer's ip address
+                deleteRequest("10.253.95.130", "soundLocation");
             }
         });
 
     }
 
+    //onResume function will perform startRecording()
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("Recording", "in onResume()");
+        startRecording();
+    }
+
+    //onStop function will stopRecording and perform any release and reset of mediaRecorder
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("Recording", "in onPause()");
+        stopRecording();
+    }
+
+    //reevaluate the donutProgress
     private void getAmp() {
 
         donutProgress.post(new Runnable() {
@@ -105,23 +124,20 @@ public class MainActivity extends Activity implements LocationListener {
             public void run() {
                     donutProgress.setProgress((int)dB);
                 }
-
         });
-
     }
 
-    /*
-
-     */
+    //setup MediaRecorder
     private void startRecording() {
         String mFileName = "/dev/null";
         String LOG_TAG = "Recording";
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mediaRecorder.setOutputFile(mFileName);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
+        //create timer for when to record the audio automatically
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new RecorderTask(mediaRecorder), 0, 500);
         try {
@@ -132,16 +148,21 @@ public class MainActivity extends Activity implements LocationListener {
 
         mediaRecorder.start();
 
-        //Toast.makeText(getApplicationContext(),mediaRecorder.getMaxAmplitude(), Toast.LENGTH_LONG);
     }
 
+    //stop MediaRecorder
     private void stopRecording() {
 
         mediaRecorder.stop();
+        mediaRecorder.reset();
+        Log.e("Recording", "stop");
         mediaRecorder.release();
+        Log.e("Recording", "release");
+
         mediaRecorder = null;
     }
 
+    //Execute HttpDelete method to delete data from the database
     private void deleteRequest(final String ip, final String collection) {
 
         new AsyncTask<Void, Void, Void>(){
@@ -149,10 +170,12 @@ public class MainActivity extends Activity implements LocationListener {
             @Override
             protected Void doInBackground(Void... params) {
 
+                //implement HttpClient and HttpDelete methods
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpDelete httpDelete = new HttpDelete("http://" + ip + ":3000/" + collection + "/");
 
                 try {
+                    //get HttpResponse
                     HttpResponse response = httpClient.execute(httpDelete);
                     // write response to log
                     Log.d("Http Delete Response:", response.toString());
@@ -167,13 +190,15 @@ public class MainActivity extends Activity implements LocationListener {
             }
         }.execute();
     }
+
+    //Execute HttpPost method to post data to database
     private void postRequest(final String xCoordinate, final String yCoordinate, final String time, final String date) {
         new AsyncTask<Void, Void, Void>(){
 
             @Override
             protected Void doInBackground(Void[] params) {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://10.253.95.190:3000/soundLocation/");
+                HttpPost httpPost = new HttpPost("http://10.253.95.130:3000/soundLocation/");
 
                 Log.d("Test", "inPostRequest");
                 List<NameValuePair> soundLocationPair = new ArrayList<>();
@@ -211,6 +236,8 @@ public class MainActivity extends Activity implements LocationListener {
             }
         }.execute();
     }
+
+    //onLocationChanged method for when LocationManager detected a change in location
     @Override
     public void onLocationChanged(Location location) {
 
@@ -257,6 +284,7 @@ public class MainActivity extends Activity implements LocationListener {
 
     }
 
+    //this function record audio and getMaxAmp and convert to decibel
     private class RecorderTask extends TimerTask {
         private MediaRecorder recorder;
 
